@@ -1,5 +1,5 @@
 import axios from "axios";
-import 'dotenv/config'
+import "dotenv/config";
 
 console.log("App is running");
 
@@ -23,6 +23,9 @@ function sendMessages() {
       }));
 
       const messages = [];
+      messages.push(
+        "https://pasala.checkout.tuboleta.com/selection/resale/item?performanceId=10229522165986&productId=10229522165883&lang=es"
+      );
       tickets.forEach((ticket) => {
         if (ticket.price <= 500000000) {
           console.log(ticket);
@@ -31,7 +34,10 @@ function sendMessages() {
           );
         }
       });
-      sendMessageWA(messages);
+      console.log(messages.length)
+      if (messages.length > 0) {
+        sendMessageWA(messages);
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -73,5 +79,5 @@ export function sendMessageWA(messages) {
       console.error("Error al enviar el mensaje:", error.response.data);
     });
 }
-
+sendMessages();
 setTimeout(sendMessages, 5 * 60 * 1000);
